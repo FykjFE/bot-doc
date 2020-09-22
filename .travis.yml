@@ -7,3 +7,5 @@ branch:
 install: yarn
 cache: yarn
 script: yarn build
+after_success:
+  - tar -zcvf build.tar.gz ./build
