@@ -9,3 +9,4 @@ cache: yarn
 script: yarn build
 after_success:
   - tar -zcvf build.tar.gz ./build
+  - rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/<dir> <ssh-user>@<deploy-host>:path/to/files

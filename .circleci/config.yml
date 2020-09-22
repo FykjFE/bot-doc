@@ -5,3 +5,16 @@ workflows:
   node-tests:
     jobs:
       - node/test
+jobs:
+  build:
+    - run:
+        - npm install
+        - npm run build
+  deploy:
+    machine:
+      enabled: true
+    steps:
+      - run:
+          name: Deploy Over SSH
+          command: |
+            ssh $SSH_USER@$SSH_HOST "<remote deploy command>"
