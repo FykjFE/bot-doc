@@ -1,21 +1,9 @@
 version: 2.1
 orbs:
   node: circleci/node@3.0.0
-workflows:
-  node-tests:
-    jobs:
-      - node/test
 jobs:
   build:
     - run:
         - npm install
         - npm run build
         - surge --project ../build --domain bot-doc.surge.sh
-#  deploy:
-#    machine:
-#      enabled: true
-#    steps:
-#      - run:
-#          name: Deploy Over SSH
-#          command: |
-#            ssh $SSH_USER@$SSH_HOST "<remote deploy command>"
