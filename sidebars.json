@@ -1,0 +1,21 @@
+{
+  "docs": {
+    "快速开始": [
+      "getting-started"
+    ],
+    "React": [
+      "react/documentation-intro",
+      "react/folder-structure",
+      "react/adding-images-fonts-and-files",
+      "react/code-splitting",
+      "react/proxying-api-requests-in-development",
+      "react/fetching-data-with-ajax-requests",
+      "react/supported-browsers-features"
+    ],
+    "Vue2": [
+      "vue2/documentation-intro",
+      "vue2/folder-structure"
+    ],
+    "FAQ": ["troubleshooting"]
+  }
+}
