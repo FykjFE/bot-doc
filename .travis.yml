@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - lts/*
+branch:
+  only:
+  - master
+install: yarn
+cache: yarn
+script: yarn build
