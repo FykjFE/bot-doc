@@ -8,7 +8,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "ae:5b:e5:d6:df:6a:a3:4a:18:4e:ac:b4:a7:67:a7:2d"
+            - "1e:2c:4f:c8:f2:08:05:19:b6:57:e2:f4:0d:f5:34:ead"
       - checkout
       - restore_cache:
           keys:
@@ -20,4 +20,4 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: sudo apt install -y rsync
-      - run: rsync -avce ssh build $SSH_USER@$SSH_IP:/data/corki-ui-web/
+      - run: rsync -av ssh build $SSH_USER@$SSH_IP:/root
