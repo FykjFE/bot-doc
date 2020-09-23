@@ -19,4 +19,5 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
+      - run: sudo apt install -y rsync
       - run: rsync -avce ssh build $SSH_USER@$SSH_IP:/data/corki-ui-web/
