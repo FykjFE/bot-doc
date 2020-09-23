@@ -2,23 +2,30 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:latest
-    filters:
-      branches:
-        only: master
+      - image: circleci/node:12
+    branches:
+      only:
+        - master
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "1e:2c:4f:c8:f2:08:05:19:b6:57:e2:f4:0d:f5:34:ead"
+            - "1e:2c:4f:c8:f2:08:05:19:b6:57:e2:f4:0d:f5:34:ea"
       - checkout
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
-      - run: yarn
+            - dependencies_imooc
+      - run:
+          name: Install
+          command: npm install
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-      - run: sudo apt install -y rsync
-      - run: rsync -av ssh build -o StrictHostKeyChecking=no $SSH_USER@$SSH_IP:/root
+          key: dependencies_imooc
+      - run:
+          name: Build
+          command: npm run build
+      - run:
+          name: Prepare shell commands
+          command: chmod +x scripts/deploy.sh
+      - run:
+          command: ssh root@113.31.126.209
