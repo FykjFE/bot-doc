@@ -1,15 +1,22 @@
-version: 2.1
-orbs:
-  node: circleci/node@1.1
 jobs:
   build:
-    executor:
-      name: node/default
-      tag: '12.18.4'
+    docker:
+      - image: circleci/node:latest
+    filters:
+      branches:
+        only: master
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "ae:5b:e5:d6:df:6a:a3:4a:18:4e:ac:b4:a7:67:a7:2d"
       - checkout
-      - node/with-cache:
-          steps:
-            - run: npm install
-            - run: npm run build
-      - run: surge --project ../build --domain bot-doc.surge.sh
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run: yarn
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run: rsync -avce ssh build $SSH_USER@$SSH_IP:/data/corki-ui-web/
