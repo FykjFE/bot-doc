@@ -20,4 +20,4 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: sudo apt install -y rsync
-      - run: rsync -av ssh build $SSH_USER@$SSH_IP:/root
+      - run: rsync -av ssh build -o StrictHostKeyChecking=no $SSH_USER@$SSH_IP:/root
