@@ -1,19 +1,20 @@
-language: node_js
-node_js:
-- stable
-cache:
-  directories:
-  - node_modules
+language: shell
+os: linux
+services:
+  - docker
+branches:
+  only:
+    - master
+addons:
+  ssh_known_hosts: $server_ip
 script:
-- yarn
-- yarn run build
-deploy:
-  provider: surge
-  skip_cleanup: true
-  domain: bot-doc-doc.surge.sh
-  project: "./build/"
-true:
-  branch: master
+  - docker build . -t "registry.cn-shanghai.aliyuncs.com/zzf2001/bot-doc:latest"
+after_success:
+  - sudo docker login --username=$username --password=$password registry.cn-shanghai.aliyuncs.com
+  - sudo docker push registry.cn-shanghai.aliyuncs.com/zzf2001/bot-doc
+  - chmod 600 ./id_rsa
+  - ssh -o "StrictHostKeyChecking no" -i ./id_rsa root@$server_ip "cd /root;mkdir opo;docker login --username=$username --password=$password registry.cn-shanghai.aliyuncs.com;docker-compose pull;docker-compose up -d;exit"
+
 before_install:
-- openssl aes-256-cbc -K $encrypted_206fdc94870f_key -iv $encrypted_206fdc94870f_iv
-  -in id_rsa.enc -out /tmp/.ssh/id_rsa -d
+  - openssl aes-256-cbc -K $encrypted_206fdc94870f_key -iv $encrypted_206fdc94870f_iv
+    -in id_rsa.enc -out ./id_rsa -d
