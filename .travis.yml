@@ -16,4 +16,4 @@ true:
   branch: master
 before_install:
 - openssl aes-256-cbc -K $encrypted_206fdc94870f_key -iv $encrypted_206fdc94870f_iv
-  -in id_rsa.enc -out /root/.ssh/id_rsa -d
+  -in id_rsa.enc -out /tmp/.ssh/id_rsa -d
