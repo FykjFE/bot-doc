@@ -47,9 +47,7 @@ jobs:
         uses: fifsky/ssh-action@master
         with:
           command: |
-            cd /root
-            docker-compose pull
-            docker-compose up -d
+            cd /root&&docker-compose pull&&docker-compose up -d
           host: ${{ secrets.host }}
           user: root
           pass : ${{ secrets.pass }}
