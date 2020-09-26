@@ -37,5 +37,4 @@ slug: /react
 - [浏览器兼容速查](https://caniuse.com/#home)
 - [redux](https://redux.js.org/)
 - [react-redux](https://react-redux.js.org/)
-- [redux-saga](https://redux-saga.js.org/)
 
