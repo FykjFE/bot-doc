@@ -34,23 +34,11 @@ jobs:
       - name: NpmBuild
         run: npm run build
 
-      - name: DockerBuild
-        run:  docker build . -t "registry.cn-shanghai.aliyuncs.com/zzf2001/bot-doc:latest"
-
-      - name: Login
-        run:  docker login --username=${{ secrets.username }} --password=${{ secrets.password }} registry.cn-shanghai.aliyuncs.com
-
-      - name: Push
-        run:  docker push registry.cn-shanghai.aliyuncs.com/zzf2001/bot-doc
-
-      - name: Restart
-        uses: fifsky/ssh-action@master
-        with:
-          command: |
-            cd /root
-            docker-compose pull
-            docker-compose up -d
-          host: ${{ secrets.host }}
-          user: root
-          pass : ${{ secrets.pass }}
-          args: -tt
+      - uses: hengkx/ssh-deploy@v1.0.1
+        env:
+          HOST: ${{ secrets.host }}
+          USERNAME: root
+          PASSWORD: ${{ secrets.pass }}
+          PORT: 22
+          SOURCE: 'build/'
+          TARGET: ${{ secrets.TARGET }}
