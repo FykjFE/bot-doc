@@ -1,18 +1,31 @@
 name: deploy
+
 on:
-  release:
-    types: [published]
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
 jobs:
   push_to_registry:
-    name: Push Docker image to Docker Hub
+    name: Push Image
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
-      - name: Push to Docker Hub
-        uses: docker/build-push-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: my-docker-hub-namespace/my-docker-hub-repository
-          tag_with_ref: true
+
+      - name: Build
+        run:  docker build . -t "registry.cn-shanghai.aliyuncs.com/zzf2001/bot-doc:latest"
+
+      - name: Login
+        run:  docker login --username=${{ secrets.username }} --password=${{ secrets.password }} registry.cn-shanghai.aliyuncs.com
+
+      - name: Push
+        run:  docker push registry.cn-shanghai.aliyuncs.com/zzf2001/bot-doc
+#      - name: Push to Docker Hub
+#        uses: docker/build-push-action@v1
+#        with:
+#          username: ${{ secrets.DOCKER_USERNAME }}
+#          password: ${{ secrets.DOCKER_PASSWORD }}
+#          repository: my-docker-hub-namespace/my-docker-hub-repository
+#          tag_with_ref: true
