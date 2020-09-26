@@ -28,4 +28,4 @@ jobs:
           username: ${{ secrets.username }}
           password: ${{ secrets.password }}
           repository: registry.cn-shanghai.aliyuncs.com/zzf2001/bot-doc:latest
-          tag_with_ref: true
+          logout: true
