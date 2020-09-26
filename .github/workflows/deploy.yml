@@ -34,11 +34,10 @@ jobs:
       - name: NpmBuild
         run: npm run build
 
-      - uses: hengkx/ssh-deploy@v1.0.1
-        env:
-          HOST: ${{ secrets.host }}
-          USERNAME: root
-          PASSWORD: ${{ secrets.pass }}
-          PORT: 22
-          SOURCE: 'build/'
-          TARGET: ${{ secrets.TARGET }}
+      - uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+        with:
+          host: ${{ secrets.host }}
+          user: root
+          pass: ${{ secrets.pass }}
+          scp: |
+            './build/*' => ${{ secrets.target }}
