@@ -33,4 +33,4 @@ jobs:
           host: ${{ secrets.host }}
           user: root
           pass : ${{ secrets.pass }}
-          arg: -tt
+          args: -tt
