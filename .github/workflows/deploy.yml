@@ -22,3 +22,14 @@ jobs:
 
       - name: Push
         run:  docker push registry.cn-shanghai.aliyuncs.com/zzf2001/bot-doc
+
+      - name: Restart
+        uses: fifsky/ssh-action@master
+        with:
+          command: |
+            cd /root
+            docker-compose pull
+            docker-compose up -d
+          host: ${{ secrets.host }}
+          user: root
+          pass : ${{ secrets.pass }}
