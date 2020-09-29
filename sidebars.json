@@ -8,9 +8,7 @@
       "react/folder-structure",
       "react/adding-images-fonts-and-files",
       "react/code-splitting",
-      "react/proxying-api-requests-in-development",
-      "react/fetching-data-with-ajax-requests",
-      "react/supported-browsers-features"
+      "react/proxying-api-requests-in-development"
     ],
     "Vue2": [
       "vue2/documentation-intro",
