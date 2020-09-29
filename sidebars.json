@@ -12,7 +12,8 @@
     ],
     "Vue2": [
       "vue2/documentation-intro",
-      "vue2/folder-structure"
+      "vue2/folder-structure",
+      "vue2/global-components"
     ],
     "FAQ": ["troubleshooting"]
   }
